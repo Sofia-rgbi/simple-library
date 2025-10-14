@@ -3,5 +3,15 @@ package main
 import"fmt"
 
 func main() {
-	fmt.Println("Проект 'Простая библиотека' запущен.")
+	user1 := Reader{
+		ID: 1,
+		FirstName: "Fatima",
+		LastName: "Tsikalova",
+		IsActive: true,
+	}
+
+	user1.Deactivate()
+	//user1.DisplayReader()
+	fmt.Println(user1)
+
 }
