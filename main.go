@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
    
@@ -41,4 +43,15 @@ func main() {
 
     // Демонстрация AssignBook
     user2.AssignBook(&book1)
+
+    notifiers := []Notifier{
+        EmailNotifier{EmailAddress: "student@example.com"},
+        SMSNotifier{PhoneNumber: "+79991234567"},
+    }
+
+    message := "Ваша книга просрочена!"
+
+    for _, notifier := range notifiers {
+        notifier.Notify(message)
+    }
 }
