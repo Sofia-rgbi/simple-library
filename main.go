@@ -1,57 +1,28 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-   
+    fmt.Println("Запуск системы управления библиотекой...")
+    // 1. Создаем экземпляр библиотеки
+    myLibrary := &Library{} //Пустая библиотека готова к работе
+    fmt.Println("\n--- Наполняем библиотеку ---")
 
-    user1 := Reader{
-        ID:        1,
-        FirstName: "Fatima",
-        LastName:  "Tokazova",
-        IsActive:  true,
-    }
-    user2 := Reader{
-        ID:        2,
-        FirstName: "Fatima",
-        LastName:  "Tsikalova",
-        IsActive:  true,
-    }
+    //2. Добавляем читателей
+    myLibrary.AddReader("Fatima", "Tokazova")
+    myLibrary.AddReader("Sofia", "Tedeeva")
 
-    book1 := Book{
-        Title:  "Idiot",
-        Author: "Dostoevskiy",
-        Year:   1869,
-    }
+    //3.Добавляем книги
+    myLibrary.AddBook("1984", "Джордж Оруэлл", 1949)
+    myLibrary.AddBook("Мастер и Маргарита", "Михаил Булгаков", 1967)
 
-    // Выдаем книгу конкретному читателю
-    book1.IssuesBook(&user1)
-    fmt.Println(book1.String()) // виден ID читателя
+    fmt.Println("\n--- Библиотека готова к работе ---")
+    fmt.Println("Количество читателей:", len(myLibrary.Readers))
+    fmt.Println("Количество книг:", len(myLibrary.Books))
 
-    // Пробуем выдать уже выданную книгу другому читателю
-    book1.IssuesBook(&user2)
-
-    // Возвращаем книгу
-    book1.ReturnBook()
-    fmt.Println(book1.String())
-
-    // Выдаем книгу неактивному читателю
-    user1.IsActive = false
-    book1.IssuesBook(&user1)
-
-    // Демонстрация AssignBook
-    user2.AssignBook(&book1)
-
-    notifiers := []Notifier{
-        EmailNotifier{EmailAddress: "student@example.com"},
-        SMSNotifier{PhoneNumber: "+79991234567"},
-    }
-
-    message := "Ваша книга просрочена!"
-
-    for _, notifier := range notifiers {
-        notifier.Notify(message)
-    }
+    fmt.Println("\nСписок всех книг в библиотеке:")
+    myLibrary.ListAllBooks()
 }
+
+
+
