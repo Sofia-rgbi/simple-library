@@ -21,7 +21,7 @@ func main() {
     fmt.Println("Количество книг:", len(myLibrary.Books))
 
     fmt.Println("\nСписок всех книг в библиотеке:")
-    myLibrary.ListAllBooks()
+    
 
     
 fmt.Println("---Тестируем выдачу книг---")
@@ -43,7 +43,36 @@ if err != nil {
 	fmt.Println("Ожидаемая ошибка:", err)
 }
 
+err1 := myLibrary.ReturnBook(1)
+if err1 != nil {
+    fmt.Println("Ошибка при выдаче книги: ", err)
+} else {
+    fmt.Println("Книга возвращена успешно")
+}
+
+err2 := myLibrary.ReturnBook(1)
+if err2 != nil {
+    fmt.Println("Ошибка при выдаче книги: ", err)
+} else {
+    fmt.Println("Книга возвращена успешно")
+}
+
+config := map[string]string {
+    "PORT" : "2123",
+}
+
+
+//config1 := map[string]string {
+//    "NOPORT" : "2132",
+//}
+//
+port, err := GetPortFromConfig(config)
+if err != nil {
+    fmt.Println("Произошла ошибка чтения порта:", err)
+}else {
+    fmt.Println("Порт номер:", port)
 }
 
 
 
+}
