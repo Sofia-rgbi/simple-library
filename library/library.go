@@ -12,6 +12,14 @@ type Library struct {
 	LastReaderID int
 }
 
+func (lib *Library) FindReaderById(id int) (any, error) {
+	panic("unimplemented")
+}
+
+func (lib *Library) FindBookById(id int) (any, error) {
+	panic("unimplemented")
+}
+
 func (lib *Library) AddReader(firstName, lastName string) *domain.Reader {
 	lib.LastReaderID++
 
@@ -26,15 +34,13 @@ func (lib *Library) AddReader(firstName, lastName string) *domain.Reader {
 	return newReader
 }
 
-
 func (lib *Library) AddBook(title, author string, year int) (*domain.Book, error) {
 
-	for _, b :=  range lib.Books{
+	for _, b := range lib.Books {
 		if b.Title == title && b.Author == author {
 			return nil, fmt.Errorf("книга '%s' автора '%s' уже существует", title, author)
 		}
 	}
-
 
 	lib.lastBookID++
 
@@ -46,12 +52,9 @@ func (lib *Library) AddBook(title, author string, year int) (*domain.Book, error
 		IsIssued: false,
 	}
 
-
-
 	lib.Books = append(lib.Books, newBook)
 	return newBook, nil
 }
-
 
 func (lib *Library) FindBookByID(id int) (*domain.Book, error) {
 	for _, book := range lib.Books {
@@ -70,7 +73,6 @@ func (lib *Library) FindReaderByID(id int) (*domain.Reader, error) {
 	}
 	return nil, fmt.Errorf("читатель с ID %d не найден", id)
 }
-
 
 func (lib *Library) IssueBookToReader(bookID int, readerID int) error {
 	book, err := lib.FindBookByID(bookID)
@@ -107,7 +109,7 @@ func (lib *Library) ReturnBook(bookID int) error {
 
 func New() *Library {
 	return &Library{
-		Books: []*domain.Book{},
+		Books:   []*domain.Book{},
 		Readers: []*domain.Reader{},
 	}
 }
